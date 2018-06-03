@@ -1,7 +1,10 @@
 package com.spotlightchess.game;
 
+import javax.websocket.Session;
+
 public class Player {
     private String username;
+    private Session session;
     
     public Player(String username) {
         this.username = username;
@@ -9,6 +12,14 @@ public class Player {
 
     public String getUsername() {
         return username;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+    
+    public Session getSession() {
+        return session;
     }
     
     public boolean equals(Object other) {
@@ -21,11 +32,5 @@ public class Player {
     
     public int hashcode() {
         return username.hashCode();
-    }
-    
-    public static void main(String[] args) {
-        Player p1 = new Player("robert");
-        Player p2 = new Player("ROBERT");
-        System.out.println(p1.equals(p2));
     }
 }

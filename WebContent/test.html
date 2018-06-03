@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Testing Socket Messages</title>
+<style>
+#messages {
+	height: 200px;
+	width: 400px;
+	overflow: scroll;
+	border: 2px solid #999;
+	border-radius: 7px;
+}
+input {
+	width: 384px;
+}
+ul {
+	list-style-type: none;
+	padding: 3px;
+}
+li {
+	list-style-type: none;
+	margin: 0;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+.received {
+	color: #3b3;
+}
+.sent {
+	color: #33b;
+}
+</style>
+</head>
+<body>
+<div>
+	<ul id="messages">
+	</ul>
+	<form onsubmit="sendMessage(); return false">
+		<input type="text" id="messageText" />
+		<button type="submit">Send</button>
+	</form>
+</div>
+<script>
+	var messageInput = document.getElementById('messageText')
+	var messages = document.getElementById('messages')
+	var gameSocket = new WebSocket('ws://localhost:8080/game/bobby25')
+	gameSocket.onmessage = function(e) {
+		createNode(e.data, 'received')
+	}
+
+	gameSocket.onopen = function() {
+		createNode('Socket opened.', '')
+	}
+	
+	gameSocket.onclose = function() {
+		createNode('Socket closed.', '')
+	}
+
+	function sendMessage() {
+		var messageText = messageInput.value
+		gameSocket.send(messageText)
+		createNode(messageText, 'sent')
+		messageInput.value = ''
+	}
+
+	function createNode(text, c) {
+		var node = document.createElement('li')
+		var nodeText = document.createTextNode(text)
+		if(c !== '')
+			node.classList.add(c)
+		node.appendChild(nodeText)
+		messages.appendChild(node)
+	}
+</script>
+</body>
+</html>

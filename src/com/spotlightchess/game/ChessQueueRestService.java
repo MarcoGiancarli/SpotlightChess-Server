@@ -24,7 +24,7 @@ import javax.json.JsonArrayBuilder;
 public class ChessQueueRestService {
 
 	private static final Logger logger = Logger.getLogger(ChessQueueRestService.class);
-	private static ConcurrentLinkedQueue<Player> chessQueue = new ConcurrentLinkedQueue<Player>();
+	protected static ConcurrentLinkedQueue<Player> chessQueue = new ConcurrentLinkedQueue<Player>();
 
 	@GET
 	@Path("/get")
@@ -58,66 +58,66 @@ public class ChessQueueRestService {
         }
 	}
 
-	@PUT
-	@Path("/poopy")
-    @Produces(MediaType.TEXT_PLAIN)
-	public String putSomething(@FormParam("request") String request , 
-	        @DefaultValue("1") @FormParam("version") int version) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("Start putSomething");
-			logger.debug("data: '" + request + "'");
-			logger.debug("version: '" + version + "'");
-		}
-
-		String response = null;
-
-        try{			
-            switch(version){
-	            case 1:
-	                if(logger.isDebugEnabled()) logger.debug("in version 1");
-
-	                response = "Response from Jersey Restful Webservice : " + request;
-                    break;
-                default: throw new Exception("Unsupported version: " + version);
-            }
-        }
-        catch(Exception e){
-        	response = e.getMessage().toString();
-        }
-        
-        if(logger.isDebugEnabled()){
-            logger.debug("result: '"+response+"'");
-            logger.debug("End putSomething");
-        }
-        return response;	
-	}
-
-	@DELETE
-	@Path("/doodoo")
-	public void deleteSomething(@FormParam("request") String request ,  @DefaultValue("1") @FormParam("version") int version) {
-		
-		if (logger.isDebugEnabled()) {
-			logger.debug("Start deleteSomething");
-			logger.debug("data: '" + request + "'");
-			logger.debug("version: '" + version + "'");
-		}
-
-
-        try{			
-            switch(version){
-	            case 1:
-	                if(logger.isDebugEnabled()) logger.debug("in version 1");
-
-                    break;
-                default: throw new Exception("Unsupported version: " + version);
-            }
-        }
-        catch(Exception e){
-        	e.printStackTrace();
-        }
-        
-        if(logger.isDebugEnabled()){
-            logger.debug("End deleteSomething");
-        }
-	}
+//	@PUT
+//	@Path("/poopy")
+//    @Produces(MediaType.TEXT_PLAIN)
+//	public String putSomething(@FormParam("request") String request , 
+//	        @DefaultValue("1") @FormParam("version") int version) {
+//		if (logger.isDebugEnabled()) {
+//			logger.debug("Start putSomething");
+//			logger.debug("data: '" + request + "'");
+//			logger.debug("version: '" + version + "'");
+//		}
+//
+//		String response = null;
+//
+//        try{			
+//            switch(version){
+//	            case 1:
+//	                if(logger.isDebugEnabled()) logger.debug("in version 1");
+//
+//	                response = "Response from Jersey Restful Webservice : " + request;
+//                    break;
+//                default: throw new Exception("Unsupported version: " + version);
+//            }
+//        }
+//        catch(Exception e){
+//        	response = e.getMessage().toString();
+//        }
+//        
+//        if(logger.isDebugEnabled()){
+//            logger.debug("result: '"+response+"'");
+//            logger.debug("End putSomething");
+//        }
+//        return response;	
+//	}
+//
+//	@DELETE
+//	@Path("/doodoo")
+//	public void deleteSomething(@FormParam("request") String request ,  @DefaultValue("1") @FormParam("version") int version) {
+//		
+//		if (logger.isDebugEnabled()) {
+//			logger.debug("Start deleteSomething");
+//			logger.debug("data: '" + request + "'");
+//			logger.debug("version: '" + version + "'");
+//		}
+//
+//
+//        try{			
+//            switch(version){
+//	            case 1:
+//	                if(logger.isDebugEnabled()) logger.debug("in version 1");
+//
+//                    break;
+//                default: throw new Exception("Unsupported version: " + version);
+//            }
+//        }
+//        catch(Exception e){
+//        	e.printStackTrace();
+//        }
+//        
+//        if(logger.isDebugEnabled()){
+//            logger.debug("End deleteSomething");
+//        }
+//	}
 }
